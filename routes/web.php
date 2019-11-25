@@ -13,5 +13,5 @@
 
 Route::get('/', function () {
     \Log::debug('Test debug message');
-    return iew('welcome');
+    return view('welcome');
 });
