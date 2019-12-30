@@ -22,9 +22,9 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->timestamps();
 
-            $table->string('firstName')->nullable();
-            $table->string('middleName')->nullable();
-            $table->string('lastName')->nullable();
+            $table->string('first_name')->nullable();
+            $table->string('middle_name')->nullable();
+            $table->string('last_name')->nullable();
             $table->boolean('sex')->nullable();
             $table->date('birthday')->nullable();
         });

@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Tag;
+use App\TagTask;
+use App\Task;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TaskController extends Controller
 {
@@ -13,7 +18,10 @@ class TaskController extends Controller
      */
     public function index()
     {
-        return view('tasks.index');
+        $tasks = Task::all();
+        $status = config('status');
+
+        return view('tasks.index', compact('tasks', 'status'));
     }
 
     /**
@@ -24,6 +32,11 @@ class TaskController extends Controller
     public function create()
     {
         //
+        $users = User::all();
+        $tags = Tag::all();
+        $status = config('status');
+
+        return view('tasks.create', compact('users', 'tags', 'status'));
     }
 
     /**
@@ -34,7 +47,25 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+
+        $task = new Task();
+        $task->title = $data['title'];
+        $task->status = $data['status_id'];
+        $task->creator_id = Auth::id();
+        $task->executor_id = $data['executor_id'];
+        $task->save();
+
+        if(isset($data['tag_id']))
+        {
+            foreach ($data['tag_id'] as $tag) {
+                TagTask::insert(['task_id' => $task->id, 'tag_id' => $tag]);
+            }
+        }
+
+        return redirect()
+            ->route('tasks.index')
+            ->with(['success' => "Запись успешно добавлена"]);
     }
 
     /**
@@ -46,6 +77,18 @@ class TaskController extends Controller
     public function show($id)
     {
         //
+        $task = Task::find($id);
+
+        $status = config('status');
+        $status = $status[$task->status];
+
+        $tagsId = TagTask::where('task_id', $task->id)->get('tag_id')->toArray();
+        $tags = Tag::whereIn('id', $tagsId)->get('name');
+
+        $creator  = User::where('id', $task->creator_id)->first();
+        $executor = User::where('id', $task->executor_id)->first();
+
+        return view('tasks.show', compact('task', 'status', 'tags', 'creator', 'executor'));
     }
 
     /**
@@ -57,6 +100,18 @@ class TaskController extends Controller
     public function edit($id)
     {
         //
+        $task = Task::find($id);
+
+        $users = User::all();
+        $tags = Tag::all();
+        $status = config('status');
+
+        $taskTags = TagTask::where('task_id', $task->id)->get('tag_id')->toArray();
+        $taskTags = array_map(function ($taskTag) {
+            return $taskTag['tag_id'];
+        }, $taskTags);
+
+        return view('tasks.edit', compact('task','users', 'tags', 'status', 'taskTags'));
     }
 
     /**
@@ -69,6 +124,24 @@ class TaskController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $data = $request->all();
+
+        $task = Task::find($id);
+        $task->title = $data['title'];
+        $task->status = $data['status_id'];
+        $task->executor_id = $data['executor_id'];
+        $task->save();
+
+        TagTask::where('task_id', '=', $id)->delete();
+
+        if(isset($data['tag_id']))
+        {
+            foreach ($data['tag_id'] as $tag) {
+                TagTask::insert(['task_id' => $id, 'tag_id' => $tag]);
+            }
+        }
+
+        return redirect()->route('tasks.edit', $id)->with(['success' => "Запись успешно обновлена"]);
     }
 
     /**
@@ -80,5 +153,9 @@ class TaskController extends Controller
     public function destroy($id)
     {
         //
+        $task = Task::find($id);
+        $task->delete();
+
+        return redirect()->route('tasks.index')->with(['success' => "Запись успешно удалена"]);
     }
 }

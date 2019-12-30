@@ -9,6 +9,17 @@
 
                     <div class="card-body">
 
+                        <table>
+                            <thead>
+
+                            </thead>
+                            @foreach($users as $user)
+                                <tr>
+                                    <td><a href="{{ route('users.show', $user->id) }}">{{ $user->name }}</a></td>
+                                </tr>
+                            @endforeach
+                        </table>
+
                     </div>
                 </div>
             </div>

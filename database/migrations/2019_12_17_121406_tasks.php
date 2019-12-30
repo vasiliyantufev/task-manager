@@ -20,7 +20,6 @@ class Tasks extends Migration
             $table->tinyInteger('status');
             $table->bigInteger('creator_id');
             $table->bigInteger('executor_id')->nullable();
-            $table->bigInteger('tag_id')->nullable();
             $table->timestamps();
         });
     }
