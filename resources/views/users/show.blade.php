@@ -14,13 +14,41 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>{{ $user->name }}</td>
-                                    <td>{{ $user->email }}</td>
-                                    <td>{{ $user->first_name }}</td>
-                                    <td>{{ $user->middle_name }}</td>
-                                    <td>{{ $user->last_name }}</td>
-                                    <td>{{ $user->sex }}</td>
-                                    <td>{{ $user->birthday }}</td>
+
+                                    <div class="form-group">
+                                        <label for="title">Логин:</label>
+                                        {{ $user->name }}
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="title">Электронная почта:</label>
+                                        {{ $user->email }}
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="title">Имя:</label>
+                                        {{ $user->first_name }}
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="title">Отчество:</label>
+                                        {{ $user->middle_name }}
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="title">Фамилия:</label>
+                                        {{ $user->last_name }}
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="title">Пол:</label>
+                                        @if ($user->sex == 1) Муж. @else Жен. @endif
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="title">Дата рождения:</label>
+                                        {{ date('Y-m-d H:i:s', $user->birthday) }}
+                                    </div>
                                 </tr>
                             </tbody>
                         </table>
