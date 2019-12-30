@@ -23,3 +23,5 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('/users', 'UserController');
 Route::resource('/tasks', 'TaskController');
 Route::resource('/tags', 'TagController');
+
+Route::resource('/comments', 'CommentController');

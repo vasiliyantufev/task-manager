@@ -19,6 +19,7 @@ class Comments extends Migration
             $table->string('text');
             $table->bigInteger('creator_id');
             $table->bigInteger('task_id');
+            $table->tinyInteger('status');
             $table->timestamps();
         });
     }
