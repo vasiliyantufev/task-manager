@@ -47,7 +47,7 @@
 
                                     <div class="form-group">
                                         <label for="title">Дата рождения:</label>
-                                        {{ date('Y-m-d H:i:s', $user->birthday) }}
+                                        {{ $user->birthday }}
                                     </div>
                                 </tr>
                             </tbody>
