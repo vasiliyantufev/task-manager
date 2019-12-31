@@ -46,7 +46,7 @@
 
                             <div class="form-group">
                                 <label>Добавить комментарий:</label>
-                                <input type="hidden" name="task_id" value="{{ $task->creator_id }}">
+                                <input type="hidden" name="task_id" value="{{ $task->id }}">
                                 <textarea class="form-control" rows="3" name="text"></textarea>
                             </div>
 

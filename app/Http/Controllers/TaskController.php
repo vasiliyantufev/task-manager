@@ -83,7 +83,7 @@ class TaskController extends Controller
         $status = config('status');
         $status = $status[$task->status];
 
-        $comments = Comment::where('task_id', $task->id)->get();
+        $comments = Comment::where('task_id', $task->id)->active()->get();
 
         ///dd($comments);
 

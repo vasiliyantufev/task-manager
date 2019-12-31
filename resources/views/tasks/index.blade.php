@@ -35,9 +35,11 @@
                             </div>
                         @endif
 
-                        <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
-                            <a class="btn btn-primary" href="{{ route('tasks.create') }}">Добавить task</a>
-                        </nav>
+                        <div class="form-group">
+                            <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+                                <a class="btn btn-primary" href="{{ route('tasks.create') }}">Добавить task</a>
+                            </nav>
+                        </div>
 
 
                         <table class="table">

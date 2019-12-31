@@ -43,6 +43,9 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('tags.index') }}">Теги</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('comments.index') }}">Коментарии</a>
+                            </li>
                         </ul>
                     @endif
 

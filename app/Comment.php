@@ -11,4 +11,9 @@ class Comment extends Model
     {
         return $this->hasOne('App\User', 'id', 'creator_id');
     }
+
+    public function scopeActive($query)
+    {
+        return $query->where('status', 1);
+    }
 }

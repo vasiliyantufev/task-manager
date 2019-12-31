@@ -16,6 +16,9 @@ class CommentController extends Controller
     public function index()
     {
         //
+        $comments = Comment::all();
+        $status = config('status');
+        return view('comments.index', compact('comments', 'status'));
     }
 
     /**
@@ -26,6 +29,7 @@ class CommentController extends Controller
     public function create()
     {
         //
+        return view('comments.create');
     }
 
     /**
@@ -69,6 +73,10 @@ class CommentController extends Controller
     public function edit($id)
     {
         //
+        $comment = Comment::find($id);
+        $status = config('status');
+
+        return view('comments.edit', compact('comment','status'));
     }
 
     /**
@@ -81,6 +89,13 @@ class CommentController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $data = $request->all();
+
+        $comment = Comment::find($id);
+        $comment->status = $data['status_id'];
+        $comment->save();
+
+        return redirect()->route('comments.edit', $id)->with(['success' => "Запись успешно обновлена"]);
     }
 
     /**
@@ -92,5 +107,9 @@ class CommentController extends Controller
     public function destroy($id)
     {
         //
+        $comment = Comment::find($id);
+        $comment->delete();
+
+        return redirect()->route('comments.index')->with(['success' => "Запись успешно удалена"]);
     }
 }
