@@ -17,9 +17,9 @@ class Comments extends Migration
         Schema::create('comments', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('text');
+            $table->tinyInteger('status');
             $table->bigInteger('creator_id');
             $table->bigInteger('task_id');
-            $table->tinyInteger('status');
             $table->timestamps();
         });
     }
