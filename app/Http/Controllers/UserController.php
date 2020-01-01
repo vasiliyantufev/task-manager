@@ -72,8 +72,26 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        $validatedData = $request->validate([
+            //'name' => ['required', 'string', 'max:255', 'unique:users'],
+            //'name' => ['required', 'string', 'max:255'],
+            'first_name' => ['required', 'string', 'max:255'],
+            'middle_name' => ['required', 'string', 'max:255'],
+            'last_name' => ['required', 'string', 'max:255'],
+            'sex' => ['required', 'int'],
+            'birthday' => ['required'],
+            //'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            //'email' => ['required', 'string', 'email', 'max:255'],
+        ]);
+
+        $user = User::find($id);
+        $user->fill($validatedData);
+        $user->save();
+
+        return redirect()->back()->with(['success' => "Запись успешно обновлена"]);
     }
+
 
     /**
      * Remove the specified resource from storage.
