@@ -16,12 +16,12 @@
 
                         <div class="form-group">
                             <label for="title">Создатель:</label>
-                            {{ $creator->name }}
+                            @if(isset($comment->creator->name)) {{ $comment->creator->name }} @else User deleted @endif
                         </div>
 
                         <div class="form-group">
                             <label for="title">Исполнитель:</label>
-                            {{ $executor->name }}
+                            @if(isset($executor->name)) {{ $executor->name }} @else User deleted @endif
                         </div>
 
                         <div class="form-group">
@@ -75,7 +75,7 @@
                                     @foreach($comments As $comment)
                                         <tr>
                                             <td>{{ $comment->text }}</td>
-                                            <td>{{ $comment->creator->name }}</td>
+                                            <td>@if(isset($comment->creator->name)) {{ $comment->creator->name }} @else User deleted @endif</td>
                                             <td>{{ $comment->created_at }}</td>
                                         </tr>
                                     @endforeach
