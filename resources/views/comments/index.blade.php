@@ -49,11 +49,12 @@
                             </thead>
 
                             @foreach($comments as $comment)
+
                                 <tbody>
                                 <tr>
                                     <td>{{ $comment->id }}</td>
                                     <td>{{ $comment->text }}</td>
-                                    <td>{{ $comment->creator->name }}</td>
+                                    <td>@if(isset($comment->creator->name)) {{ $comment->creator->name }} @else User deleted @endif </td>
                                     <td>{{ $status[$comment->status] }}</td>
                                     <td>{{ $comment->created_at }}</td>
                                     <td>

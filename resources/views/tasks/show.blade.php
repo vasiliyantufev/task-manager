@@ -58,30 +58,31 @@
                         </form>
                         </div>
 
+                        @if ( !$comments->isEmpty() )
+                            <div class="form-group">
+                                <label for="title">Комментарии:</label>
 
-                        <div class="form-group">
-                            <label for="title">Комментарии:</label>
-
-                            <table class="table">
-                                <thead>
-                                <tr>
-                                    <th scope="col">Text</th>
-                                    <th scope="col">Creator</th>
-                                    <th scope="col">Created_at</th>
-                                </tr>
-                                </thead>
-
-                                <tbody>
-                            @foreach($comments As $comment)
+                                <table class="table">
+                                    <thead>
                                     <tr>
-                                        <td>{{ $comment->text }}</td>
-                                        <td>{{ $comment->creator->name }}</td>
-                                        <td>{{ $comment->created_at }}</td>
+                                        <th scope="col">Text</th>
+                                        <th scope="col">Creator</th>
+                                        <th scope="col">Created_at</th>
                                     </tr>
-                            @endforeach
-                                </tbody>
-                            </table>
-                        </div>
+                                    </thead>
+
+                                    <tbody>
+                                    @foreach($comments As $comment)
+                                        <tr>
+                                            <td>{{ $comment->text }}</td>
+                                            <td>{{ $comment->creator->name }}</td>
+                                            <td>{{ $comment->created_at }}</td>
+                                        </tr>
+                                    @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        @endif
 
                     </div>
                 </div>

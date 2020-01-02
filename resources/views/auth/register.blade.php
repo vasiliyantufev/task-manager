@@ -71,7 +71,7 @@
                             <label for="sex" class="col-md-4 col-form-label text-md-right">{{ __('Sex') }}</label>
 
                             <div class="col-md-6">
-                                <select name="executor_id" class="form-control material-select" data-live-search="true">
+                                <select name="sex" class="form-control material-select" data-live-search="true">
                                     <option value="1" >Муж.</option>
                                     <option value="0" >Жен.</option>
                                 </select>
