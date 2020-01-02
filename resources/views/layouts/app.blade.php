@@ -29,10 +29,9 @@
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
-                    @if(\Illuminate\Support\Facades\Auth::check())
+                    @if(Auth::check())
                         <ul class="navbar-nav mr-auto">
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('users.index') }}">Пользователи</a>
@@ -40,12 +39,15 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('tasks.index') }}">Задачи</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('tags.index') }}">Теги</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('comments.index') }}">Коментарии</a>
-                            </li>
+
+                            @if(Auth::user()->isAdmin())
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('tags.index') }}">Теги</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('comments.index') }}">Коментарии</a>
+                                </li>
+                            @endif
                         </ul>
                     @endif
 

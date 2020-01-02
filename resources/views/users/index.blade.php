@@ -29,7 +29,7 @@
                                     <td>@if ($user->is_admin == 1) admin @else user @endif</td>
                                     <td>{{ $user->created_at }}</td>
                                     <td>
-                                        @if ($user->is_admin != 1)
+                                        @if ($user->is_admin != 1 && Auth::user()->isAdmin())
 
                                             <form action="{{ route('users.destroy', [$user->id])}}" method="POST">
                                                 @method('DELETE')
