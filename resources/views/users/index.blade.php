@@ -25,10 +25,10 @@
                                 <tr id="rowTbl{{ $user->id }}">
                                     <td>{{ $user->id }}</td>
                                     <td><a href="{{ route('users.show', $user->id) }}">{{ $user->name }}</a></td>
-                                    <td>@if (Auth::user()->isAdmin()) admin @else user @endif</td>
+                                    <td>@if ($user->is_admin) admin @else user @endif</td>
                                     <td>{{ $user->created_at }}</td>
                                     <td>
-                                        @if (Auth::user()->isAdmin())
+                                        @if (Auth::user()->isAdmin() && !$user->is_admin)
                                             <input type="button" class="btn btn-danger" value="Delete" onclick="setId({{ $user->id }})" data-toggle="modal" data-target="#exampleModal">
                                         @endif
                                     </td>
