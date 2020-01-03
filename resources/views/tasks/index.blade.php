@@ -56,31 +56,26 @@
 
                             <tbody>
                             @foreach($tasks as $task)
-                                <tr>
+                                <tr id="rowTbl{{ $task->id }}">
                                     <td>{{ $task->id }}</td>
                                     <td><a href="{{ route('tasks.show', $task->id) }}">{{ $task->title }}</a></td>
                                     <td>{{ $task->created_at }}</td>
                                     <td>{{ $status[$task->status] }}</td>
                                     <td>
-                                        @if ( \Illuminate\Support\Facades\Auth::id() == $task->creator_id)
+                                        @if ( Auth::id() == $task->creator_id || Auth::user()->isAdmin())
                                             <a href="{{ route('tasks.edit', $task->id) }}">
                                                 <input type="button" class="btn btn-info" value="Edit"/>
                                             </a>
                                         @endif
                                     </td>
                                     <td>
-                                        @if ( \Illuminate\Support\Facades\Auth::id() == $task->creator_id)
-                                            <form action="{{ route('tasks.destroy', [$task->id])}}" method="POST">
-                                                @method('DELETE')
-                                                @csrf
-                                                <input type="submit" class="btn btn-danger" value="Delete"/>
-                                            </form>
+                                        @if ( Auth::id() == $task->creator_id || Auth::user()->isAdmin())
+                                            <input type="button" class="btn btn-danger" value="Delete" onclick="setId({{ $task->id }})" data-toggle="modal" data-target="#exampleModal">
                                         @endif
                                     </td>
                                 </tr>
-
-                                @endforeach
-                                </tbody>
+                            @endforeach
+                            </tbody>
                         </table>
 
                     </div>
@@ -88,4 +83,48 @@
             </div>
         </div>
     </div>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Внимание!</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Вы действительно хотите удалить запись?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="deleteTask()">Удалить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var idTask;
+
+        function setId(id) {
+            idTask=id;
+        }
+
+        function deleteTask(){
+            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+
+            $.ajax({
+                type:'POST',
+                url:'/delete_task',
+                data: {_token: CSRF_TOKEN, id: idTask},
+                success:function(data){
+                    $("#rowTbl" + idTask).remove();
+                    //alert(data.success);
+                }
+            });
+        }
+    </script>
 @endsection

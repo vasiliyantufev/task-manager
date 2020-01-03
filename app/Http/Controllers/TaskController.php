@@ -22,7 +22,7 @@ class TaskController extends Controller
         $tasks = Task::all();
         $status = config('status');
 
-        return view('tasks.index', compact('tasks', 'status', 'user'));
+        return view('tasks.index', compact('tasks', 'status'));
     }
 
     /**
