@@ -42,6 +42,7 @@
                         </div>
 
 
+                        @if(!$tags->isEmpty())
                         <table class="table">
                             <thead>
                             <tr>
@@ -71,6 +72,10 @@
                             @endforeach
                             </tbody>
                         </table>
+
+                            @else
+                                <label>Теги не добавлены</label>
+                            @endif
 
                     </div>
                 </div>

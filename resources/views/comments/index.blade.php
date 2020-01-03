@@ -35,6 +35,7 @@
                             </div>
                         @endif
 
+                        @if(!$comments->isEmpty())
                         <table class="table">
                             <thead>
                             <tr>
@@ -62,17 +63,16 @@
                                         </a>
                                     </td>
                                     <td>
-{{--                                        <form action="{{ route('comments.destroy', [$comment->id])}}" method="POST">--}}
-{{--                                            @method('DELETE')--}}
-{{--                                            @csrf--}}
-{{--                                            <input type="submit" class="btn btn-danger" value="Delete"/>--}}
-{{--                                        </form>--}}
                                         <input type="button" class="btn btn-danger" value="Delete" onclick="setId({{ $comment->id }})" data-toggle="modal" data-target="#exampleModal">
                                     </td>
                                 </tr>
                             @endforeach
                             </tbody>
                         </table>
+
+                            @else
+                                <label>Комментарии не добавлены</label>
+                            @endif
 
                     </div>
                 </div>

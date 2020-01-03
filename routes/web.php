@@ -13,7 +13,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('/users', 'UserController');
     Route::resource('/tasks', 'TaskController');
 
-    //Route::get('/delete_user','AjaxController@deleteUser');
     Route::post('/delete_user','AjaxController@deleteUser');
     Route::post('/delete_tag','AjaxController@deleteTag');
     Route::post('/delete_task','AjaxController@deleteTask');

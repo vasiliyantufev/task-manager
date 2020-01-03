@@ -41,7 +41,7 @@
                             </nav>
                         </div>
 
-
+                        @if(!$tasks->isEmpty())
                         <table class="table">
                             <thead>
                             <tr>
@@ -77,6 +77,10 @@
                             @endforeach
                             </tbody>
                         </table>
+
+                        @else
+                                <label>Задачи не добавлены</label>
+                        @endif
 
                     </div>
                 </div>
