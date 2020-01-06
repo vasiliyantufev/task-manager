@@ -56,13 +56,12 @@ class UserTest extends TestCase
     {
         $id = $this->user->id;
 
-        $user = User::find($id);
         $response = $this->get(route('users.show', $id));
 
         $response->assertStatus(200);
         $response->assertSee($this->user->name);
 
-        $user->delete();
+        $this->user->delete();
 
         $response = $this->get(route('users.show', $id));
         $response->assertStatus(404);

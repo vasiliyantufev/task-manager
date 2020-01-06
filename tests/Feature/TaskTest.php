@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Task;
 use App\User;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -15,6 +16,7 @@ class TaskTest extends TestCase
         parent::setUp();
 
         $this->user = factory(User::class)->create();
+        $this->task = factory(Task::class)->create();
         $this->actingAs($this->user);
     }
 
@@ -27,44 +29,43 @@ class TaskTest extends TestCase
 
     public function testShow()
     {
-        $response = $this->get(route('users.show', $this->user->id));
+        $response = $this->get(route('tasks.show', $this->task->id));
         $response->assertStatus(200);
-        $response->assertSee($this->user->name);
+        $response->assertSee($this->task->name);
     }
 
     public function testUpdate()
     {
-        $id = $this->user->id;
-        $name = $this->user->name;
+        $id = $this->task->id;
+        $title = $this->task->title;
         $testName = 'TestNameCheck';
 
-        $response = $this->get(route('users.show', $id));
+        $response = $this->get(route('tasks.show', $id));
         $response->assertStatus(200);
 
-        $response->assertSee($name);
+        $response->assertSee($title);
         $response->assertDontSee($testName);
 
-        $this->user->name = $testName;
-        $this->user->save();
+        $this->task->title = $testName;
+        $this->task->save();
 
-        $response = $this->get(route('users.show', $id));
-        $response->assertDontSee($name);
+        $response = $this->get(route('tasks.show', $id));
+        $response->assertDontSee($title);
         $response->assertSee($testName);
     }
 
     public function testDestroy()
     {
-        $id = $this->user->id;
+        $id = $this->task->id;
 
-        $user = User::find($id);
-        $response = $this->get(route('users.show', $id));
+        $response = $this->get(route('tasks.show', $id));
 
         $response->assertStatus(200);
-        $response->assertSee($this->user->name);
+        $response->assertSee($this->task->title);
 
-        $user->delete();
+        $this->task->delete();
 
-        $response = $this->get(route('users.show', $id));
+        $response = $this->get(route('tasks.show', $id));
         $response->assertStatus(404);
     }
 
