@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\User;
+use Illuminate\Support\Str;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -36,20 +37,20 @@ class UserTest extends TestCase
     {
         $id = $this->user->id;
         $name = $this->user->name;
-        $testName = 'TestNameCheck';
+        $userTestName = Str::random(32);
 
         $response = $this->get(route('users.show', $id));
         $response->assertStatus(200);
 
         $response->assertSee($name);
-        $response->assertDontSee($testName);
+        $response->assertDontSee($userTestName);
 
-        $this->user->name = $testName;
+        $this->user->name = $userTestName;
         $this->user->save();
 
         $response = $this->get(route('users.show', $id));
         $response->assertDontSee($name);
-        $response->assertSee($testName);
+        $response->assertSee($userTestName);
     }
 
     public function testDestroy()

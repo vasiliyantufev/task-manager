@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Task;
 use App\User;
+use Illuminate\Support\Str;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -38,20 +39,20 @@ class TaskTest extends TestCase
     {
         $id = $this->task->id;
         $title = $this->task->title;
-        $testName = 'TestNameCheck';
+        $taskTestName = Str::random(32);
 
         $response = $this->get(route('tasks.show', $id));
         $response->assertStatus(200);
 
         $response->assertSee($title);
-        $response->assertDontSee($testName);
+        $response->assertDontSee($taskTestName);
 
-        $this->task->title = $testName;
+        $this->task->title = $taskTestName;
         $this->task->save();
 
         $response = $this->get(route('tasks.show', $id));
         $response->assertDontSee($title);
-        $response->assertSee($testName);
+        $response->assertSee($taskTestName);
     }
 
     public function testDestroy()
