@@ -71,6 +71,11 @@ class TagController extends Controller
     {
         //
         $tag = Tag::find($id);
+
+        if(is_null($tag)) {
+            abort(404);
+        }
+
         return view('tags.edit', compact('tag'));
     }
 

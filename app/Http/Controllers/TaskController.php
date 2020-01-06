@@ -80,19 +80,20 @@ class TaskController extends Controller
         //
         $task = Task::find($id);
 
+        if(is_null($task)) {
+            abort(404);
+        }
+
         $status = config('status');
         $status = $status[$task->status];
 
         $comments = Comment::where('task_id', $task->id)->active()->get();
-
-        ///dd($comments);
 
         $tagsId = TagTask::where('task_id', $task->id)->get('tag_id')->toArray();
         $tags = Tag::whereIn('id', $tagsId)->get('name');
 
         $creator  = User::where('id', $task->creator_id)->first();
         $executor = User::where('id', $task->executor_id)->first();
-
         return view('tasks.show', compact('task', 'status', 'tags', 'creator', 'executor', 'comments'));
     }
 
@@ -106,6 +107,10 @@ class TaskController extends Controller
     {
         //
         $task = Task::find($id);
+
+        if(is_null($task)) {
+            abort(404);
+        }
 
         $users = User::all();
         $tags = Tag::all();

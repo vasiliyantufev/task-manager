@@ -74,6 +74,11 @@ class CommentController extends Controller
     {
         //
         $comment = Comment::find($id);
+
+        if(is_null($comment)) {
+            abort(404);
+        }
+
         $status = config('status');
 
         return view('comments.edit', compact('comment','status'));
