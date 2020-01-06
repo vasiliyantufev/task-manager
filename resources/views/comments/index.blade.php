@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
@@ -53,7 +54,8 @@
                             @foreach($comments as $comment)
                                 <tr id="rowTbl{{ $comment->id }}">
                                     <td>{{ $comment->id }}</td>
-                                    <td>{{ $comment->text }}</td>
+                                    <td id="tblBreakTd">{{ $comment->text }}</td>
+
                                     <td>@if(isset($comment->creator->name)) {{ $comment->creator->name }} @else User deleted @endif </td>
                                     <td>{{ $status[$comment->status] }}</td>
                                     <td>{{ $comment->created_at }}</td>

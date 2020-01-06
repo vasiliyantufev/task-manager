@@ -24,7 +24,7 @@
                             @foreach($users as $user)
                                 <tr id="rowTbl{{ $user->id }}">
                                     <td>{{ $user->id }}</td>
-                                    <td><a href="{{ route('users.show', $user->id) }}">{{ $user->name }}</a></td>
+                                    <td id="tblBreakTd"><a href="{{ route('users.show', $user->id) }}">{{ $user->name }}</a></td>
                                     <td>@if ($user->is_admin) admin @else user @endif</td>
                                     <td>{{ $user->created_at }}</td>
                                     <td>

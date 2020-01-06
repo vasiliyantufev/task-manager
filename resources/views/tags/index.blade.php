@@ -58,7 +58,7 @@
                             @foreach($tags as $tag)
                                 <tr id="rowTbl{{ $tag->id }}">
                                     <td>{{ $tag->id }}</td>
-                                    <td>{{ $tag->name }}</td>
+                                    <td id="tblBreakTd">{{ $tag->name }}</td>
                                     <td>{{ $tag->created_at }}</td>
                                     <td>
                                         <a href="{{ route('tags.edit', $tag->id) }}">

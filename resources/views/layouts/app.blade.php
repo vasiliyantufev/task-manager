@@ -19,6 +19,13 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <style>
+        #tblBreakTd {
+            word-break: break-all
+        }
+    </style>
+
 </head>
 <body>
     <div id="app">

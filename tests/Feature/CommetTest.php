@@ -38,7 +38,7 @@ class CommentTest extends TestCase
     public function testUpdate()
     {
         $text = $this->comment->text;
-        $commentTestName = Str::random(32);
+        $commentTestName = Str::random(64);
 
         $response = $this->get(route('comments.index'));
         $response->assertStatus(200);

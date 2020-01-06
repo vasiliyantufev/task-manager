@@ -58,7 +58,7 @@
                             @foreach($tasks as $task)
                                 <tr id="rowTbl{{ $task->id }}">
                                     <td>{{ $task->id }}</td>
-                                    <td><a href="{{ route('tasks.show', $task->id) }}">{{ $task->title }}</a></td>
+                                    <td id="tblBreakTd"><a href="{{ route('tasks.show', $task->id) }}">{{ $task->title }}</a></td>
                                     <td>{{ $task->created_at }}</td>
                                     <td>{{ $status[$task->status] }}</td>
                                     <td>
