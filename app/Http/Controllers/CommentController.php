@@ -49,7 +49,7 @@ class CommentController extends Controller
         $task->creator_id = Auth::id();
         $task->save();
 
-        return redirect()->back();
+        return redirect()->back()->with(['success' => 'Comment checking!']);
 
     }
 

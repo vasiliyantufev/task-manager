@@ -13,6 +13,6 @@ $factory->define(Comment::class, function (Faker $faker) {
         'text' => $faker->name,
         'creator_id' => User::all()->random(),
         'task_id' => Task::all()->random(),
-        'status' => random_int(1, 2),
+        'status' => random_int(0, 1),
     ];
 });
