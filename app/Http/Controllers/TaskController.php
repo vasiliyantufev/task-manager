@@ -9,6 +9,7 @@ use App\Task;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Input;
 
 class TaskController extends Controller
 {
@@ -19,10 +20,33 @@ class TaskController extends Controller
      */
     public function index()
     {
-        $tasks = Task::all();
+        $query = Input::all();
+
+        $tags = Tag::all();
+        $users = User::all();
         $status = config('status');
 
-        return view('tasks.index', compact('tasks', 'status'));
+        if (empty($query)) {
+            $tasks = Task::all();
+        }
+        elseif (empty($query['tag_id'])) {
+            $tasks = Task::whereCreator($query['creator_id'])
+                ->whereExecutor($query['executor_id'])
+                ->whereStatus($query['status_id'])
+                ->get();
+        }
+        elseif (!empty($query)) {
+            $tasks = Task::whereCreator($query['creator_id'])
+                ->whereExecutor($query['executor_id'])
+                ->whereStatus($query['status_id'])
+                ->join('tag_task', 'tag_task.task_id', '=', 'tasks.id')
+                ->whereTag($query['tag_id'])
+                ->select('tasks.*')
+                ->groupBy('tasks.id')
+                ->get();
+        }
+
+        return view('tasks.index', compact('tasks', 'status', 'users', 'tags', 'query'));
     }
 
     /**

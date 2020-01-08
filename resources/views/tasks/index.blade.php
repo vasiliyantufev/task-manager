@@ -36,10 +36,74 @@
                         @endif
 
                         <div class="form-group">
-                            <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
                                 <a class="btn btn-primary" href="{{ route('tasks.create') }}">Добавить task</a>
-                            </nav>
                         </div>
+
+                            <form>
+                                <div class="form-row">
+
+                                    <div class="col-md-4 mb-4">
+                                        <label>Создатель</label>
+                                        <select name="creator_id" class="form-control material-select" data-live-search="true">
+                                            <option value=""></option>
+                                            @foreach($users As $user)
+                                                @if (isset($query['creator_id']) && $query['creator_id'] == $user->id)
+                                                    <option selected value="{{ $user->id }} ">{{ $user->name }}</option>
+                                                @else
+                                                    <option value="{{ $user->id }} ">{{ $user->name }}</option>
+                                                @endif
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4 mb-4">
+                                        <label>Исполнитель</label>
+                                        <select name="executor_id" class="form-control material-select" data-live-search="true">
+                                            <option value=""></option>
+                                            @foreach($users As $user)
+                                                @if (isset($query['executor_id']) && $query['executor_id'] == $user->id)
+                                                    <option selected value="{{ $user->id }} ">{{ $user->name }}</option>
+                                                @else
+                                                    <option value="{{ $user->id }} ">{{ $user->name }}</option>
+                                                @endif
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4 mb-4">
+                                        <label>Статус</label>
+                                        <select name="status_id" class="form-control material-select" data-live-search="true">
+                                            <option value=""></option>
+                                            @foreach($status As $key => $value)
+                                                @if (isset($query['status_id']) && $query['status_id'] == $key)
+                                                    <option selected value="{{ $key }} ">{{ $value }}</option>
+                                                @else
+                                                    <option value="{{ $key }}">{{ $value }}</option>
+                                                @endif
+
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-md-12 mb-12">
+                                        <label>Теги</label>
+                                        <select  name="tag_id[]" class="form-control material-select" data-live-search="true" multiple>
+                                            <option value=""></option>
+                                            @foreach($tags As $tag)
+                                                @if (isset($query['tag_id']) && in_array($tag->id, $query['tag_id']))
+                                                    <option selected value="{{ $tag->id }} ">{{ $tag->name }}</option>
+                                                @else
+                                                    <option value="{{ $tag->id }} ">{{ $tag->name }}</option>
+                                                @endif
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="form-group">
+                                    <button class="btn btn-primary" type="submit">Применить фильтр</button>
+                                    <button class="btn btn-primary" type="reset">Сбросить фильтр</button>
+                                </div>
+                            </form>
 
                         @if(!$tasks->isEmpty())
                         <table class="table">
@@ -79,7 +143,7 @@
                         </table>
 
                         @else
-                                <label>Задачи не добавлены</label>
+                            <label>Задачи не добавлены</label>
                         @endif
 
                     </div>
