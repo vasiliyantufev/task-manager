@@ -83,7 +83,13 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Task Manager
+                    <p>Task Manager</p>
+
+                </div>
+                <div>
+                    <p>Admin:</p>
+                    <p>email - pety@gmail.com</p>
+                    <p>password - 11111111</p>
                 </div>
 
             </div>
