@@ -50,7 +50,6 @@ class CommentController extends Controller
         $task->save();
 
         return redirect()->back()->with(['success' => 'Comment checking!']);
-
     }
 
     /**
@@ -72,16 +71,15 @@ class CommentController extends Controller
      */
     public function edit($id)
     {
-        //
         $comment = Comment::find($id);
 
-        if(is_null($comment)) {
+        if (is_null($comment)) {
             abort(404);
         }
 
         $status = config('status');
 
-        return view('comments.edit', compact('comment','status'));
+        return view('comments.edit', compact('comment', 'status'));
     }
 
     /**

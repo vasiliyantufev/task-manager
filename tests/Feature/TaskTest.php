@@ -69,5 +69,4 @@ class TaskTest extends TestCase
         $response = $this->get(route('tasks.show', $id));
         $response->assertStatus(404);
     }
-
 }

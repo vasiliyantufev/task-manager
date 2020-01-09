@@ -67,5 +67,4 @@ class UserTest extends TestCase
         $response = $this->get(route('users.show', $id));
         $response->assertStatus(404);
     }
-
 }

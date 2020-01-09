@@ -72,7 +72,7 @@ class TagController extends Controller
         //
         $tag = Tag::find($id);
 
-        if(is_null($tag)) {
+        if (is_null($tag)) {
             abort(404);
         }
 

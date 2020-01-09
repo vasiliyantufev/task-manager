@@ -48,7 +48,7 @@ class UserController extends Controller
     public function show($id)
     {
         $user = User::find($id);
-        if(is_null($user)) {
+        if (is_null($user)) {
             abort(404);
         }
 

@@ -28,14 +28,12 @@ class TaskController extends Controller
 
         if (empty($query)) {
             $tasks = Task::all();
-        }
-        elseif (empty($query['tag_id'])) {
+        } elseif (empty($query['tag_id'])) {
             $tasks = Task::whereCreator($query['creator_id'])
                 ->whereExecutor($query['executor_id'])
                 ->whereStatus($query['status_id'])
                 ->get();
-        }
-        elseif (!empty($query)) {
+        } elseif (!empty($query)) {
             $tasks = Task::whereCreator($query['creator_id'])
                 ->whereExecutor($query['executor_id'])
                 ->whereStatus($query['status_id'])
@@ -81,8 +79,7 @@ class TaskController extends Controller
         $task->executor_id = $data['executor_id'];
         $task->save();
 
-        if(isset($data['tag_id']))
-        {
+        if (isset($data['tag_id'])) {
             foreach ($data['tag_id'] as $tag) {
                 TagTask::insert(['task_id' => $task->id, 'tag_id' => $tag]);
             }
@@ -104,7 +101,7 @@ class TaskController extends Controller
         //
         $task = Task::find($id);
 
-        if(is_null($task)) {
+        if (is_null($task)) {
             abort(404);
         }
 
@@ -132,7 +129,7 @@ class TaskController extends Controller
         //
         $task = Task::find($id);
 
-        if(is_null($task)) {
+        if (is_null($task)) {
             abort(404);
         }
 
@@ -145,7 +142,7 @@ class TaskController extends Controller
             return $taskTag['tag_id'];
         }, $taskTags);
 
-        return view('tasks.edit', compact('task','users', 'tags', 'status', 'taskTags'));
+        return view('tasks.edit', compact('task', 'users', 'tags', 'status', 'taskTags'));
     }
 
     /**
@@ -168,8 +165,7 @@ class TaskController extends Controller
 
         TagTask::where('task_id', '=', $id)->delete();
 
-        if(isset($data['tag_id']))
-        {
+        if (isset($data['tag_id'])) {
             foreach ($data['tag_id'] as $tag) {
                 TagTask::insert(['task_id' => $id, 'tag_id' => $tag]);
             }
