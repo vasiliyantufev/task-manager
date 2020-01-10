@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Comment;
+use App\Task;
 use App\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Support\Str;
@@ -19,6 +20,7 @@ class CommentTest extends TestCase
         parent::setUp();
 
         $this->user = factory(User::class)->create();
+        $this->task = factory(Task::class)->create();
         $this->comment = factory(Comment::class)->create();
         $this->actingAs($this->user);
     }
