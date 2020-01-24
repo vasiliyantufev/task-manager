@@ -124,7 +124,7 @@
                                     <td>{{ $task->id }}</td>
                                     <td id="tblBreakTd"><a href="{{ route('tasks.show', $task->id) }}">{{ $task->title }}</a></td>
                                     <td>{{ $task->created_at }}</td>
-                                    <td>{{ $status[$task->status] }}</td>
+                                    <td>{{ $status[$task->status_id] }}</td>
                                     <td>
                                         @if ( Auth::id() == $task->creator_id || Auth::user()->isAdmin())
                                             <a href="{{ route('tasks.edit', $task->id) }}">

@@ -74,7 +74,7 @@ class TaskController extends Controller
 
         $task = new Task();
         $task->title = $data['title'];
-        $task->status = $data['status_id'];
+        $task->status_id = $data['status_id'];
         $task->creator_id = Auth::id();
         $task->executor_id = $data['executor_id'];
         $task->save();
@@ -106,7 +106,7 @@ class TaskController extends Controller
         }
 
         $status = config('status');
-        $status = $status[$task->status];
+        $status = $status[$task->status_id];
 
         $comments = Comment::where('task_id', $task->id)->active()->get();
 
@@ -159,7 +159,7 @@ class TaskController extends Controller
 
         $task = Task::find($id);
         $task->title = $data['title'];
-        $task->status = $data['status_id'];
+        $task->status_id = $data['status_id'];
         $task->executor_id = $data['executor_id'];
         $task->save();
 

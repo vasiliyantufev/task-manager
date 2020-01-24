@@ -57,7 +57,7 @@
                                     <td id="tblBreakTd">{{ $comment->text }}</td>
 
                                     <td>@if(isset($comment->creator->name)) {{ $comment->creator->name }} @else User deleted @endif </td>
-                                    <td>{{ $status[$comment->status] }}</td>
+                                    <td>{{ $status[$comment->status_id] }}</td>
                                     <td>{{ $comment->created_at }}</td>
                                     <td>
                                         <a href="{{ route('comments.edit', $comment->id) }}">

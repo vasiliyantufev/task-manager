@@ -95,7 +95,7 @@ class CommentController extends Controller
         $data = $request->all();
 
         $comment = Comment::find($id);
-        $comment->status = $data['status_id'];
+        $comment->status_id = $data['status_id'];
         $comment->save();
 
         return redirect()->route('comments.edit', $id)->with(['success' => "Запись успешно обновлена"]);
