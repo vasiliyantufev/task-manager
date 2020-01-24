@@ -39,33 +39,22 @@ class UserTest extends TestCase
     {
         $id = $this->user->id;
         $name = $this->user->name;
-        $userTestName = Str::random(32);
-
-        $response = $this->get(route('users.show', $id));
-        $response->assertStatus(200);
-
-        $response->assertSee($name);
-        $response->assertDontSee($userTestName);
-
-        $this->user->name = $userTestName;
+        $this->user->name = $name;
+        $this->user->save();
+        $userRandomName = Str::random(32);
+        $this->user->name = $userRandomName;
         $this->user->save();
 
         $response = $this->get(route('users.show', $id));
+        $response->assertStatus(200);
         $response->assertDontSee($name);
-        $response->assertSee($userTestName);
+        $response->assertSee($userRandomName);
     }
 
     public function testDestroy()
     {
         $id = $this->user->id;
-
-        $response = $this->get(route('users.show', $id));
-
-        $response->assertStatus(200);
-        $response->assertSee($this->user->name);
-
         $this->user->delete();
-
         $response = $this->get(route('users.show', $id));
         $response->assertStatus(404);
     }

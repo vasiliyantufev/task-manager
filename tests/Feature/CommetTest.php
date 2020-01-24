@@ -42,30 +42,24 @@ class CommentTest extends TestCase
     public function testUpdate()
     {
         $text = $this->comment->text;
-        $commentTestName = Str::random(64);
-
-        $response = $this->get(route('comments.index'));
-        $response->assertStatus(200);
-
-        $response->assertSee($text);
-        $response->assertDontSee($commentTestName);
-
-        $this->comment->text = $commentTestName;
+        $this->comment->text = $text;
+        $this->comment->save();
+        $commentRandomName = Str::random(64);
+        $this->comment->text = $commentRandomName;
         $this->comment->save();
 
         $response = $this->get(route('comments.index'));
+        $response->assertStatus(200);
         $response->assertDontSee($text);
-        $response->assertSee($commentTestName);
+        $response->assertSee($commentRandomName);
     }
 
     public function testDestroy()
     {
         $name = $this->comment->text;
-        $response = $this->get(route('comments.index'));
-        $response->assertStatus(200);
-        $response->assertSee($this->comment->text);
         $this->comment->delete();
         $response = $this->get(route('comments.index'));
+        $response->assertStatus(200);
         $response->assertDontSee($name);
     }
 }

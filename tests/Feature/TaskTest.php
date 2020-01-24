@@ -41,33 +41,22 @@ class TaskTest extends TestCase
     {
         $id = $this->task->id;
         $title = $this->task->title;
-        $taskTestName = Str::random(32);
-
-        $response = $this->get(route('tasks.show', $id));
-        $response->assertStatus(200);
-
-        $response->assertSee($title);
-        $response->assertDontSee($taskTestName);
-
-        $this->task->title = $taskTestName;
+        $this->task->title = $title;
+        $this->task->save();
+        $taskRandomName = Str::random(32);
+        $this->task->title = $taskRandomName;
         $this->task->save();
 
         $response = $this->get(route('tasks.show', $id));
+        $response->assertStatus(200);
         $response->assertDontSee($title);
-        $response->assertSee($taskTestName);
+        $response->assertSee($taskRandomName);
     }
 
     public function testDestroy()
     {
         $id = $this->task->id;
-
-        $response = $this->get(route('tasks.show', $id));
-
-        $response->assertStatus(200);
-        $response->assertSee($this->task->title);
-
         $this->task->delete();
-
         $response = $this->get(route('tasks.show', $id));
         $response->assertStatus(404);
     }
