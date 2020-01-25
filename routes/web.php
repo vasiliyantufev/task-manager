@@ -13,10 +13,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('/users', 'UserController');
     Route::resource('/tasks', 'TaskController');
 
-    Route::post('/delete_user', 'AjaxController@deleteUser');
-    Route::post('/delete_tag', 'AjaxController@deleteTag');
-    Route::post('/delete_task', 'AjaxController@deleteTask');
-    Route::post('/delete_comment', 'AjaxController@deleteComment');
 });
 
 Route::group(['middleware' => ['auth', CheckAdmin::class]], function () {

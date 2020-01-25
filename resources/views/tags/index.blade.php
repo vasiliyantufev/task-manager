@@ -39,7 +39,6 @@
                             <a class="btn btn-primary" href="{{ route('tags.create') }}">Добавить tag</a>
                         </div>
 
-
                         @if(!$tags->isEmpty())
                             <table class="table">
                                 <thead>
@@ -64,67 +63,23 @@
                                             </a>
                                         </td>
                                         <td>
-                                            <input type="button" class="btn btn-danger" value="Delete"
-                                                   onclick="setId({{ $tag->id }})" data-toggle="modal"
-                                                   data-target="#exampleModal">
+                                            <form action="{{ route("tags.destroy", $tag->id) }}" method="post">
+                                                @method('DELETE')
+                                                @csrf
+                                                <input class="btn btn-danger" type="submit" value="Delete" />
+                                            </form>
                                         </td>
                                     </tr>
                                 @endforeach
                                 </tbody>
                             </table>
-
                         @else
                             <label>Теги не добавлены</label>
                         @endif
-
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-         aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Внимание!</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    Вы действительно хотите удалить запись?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="deleteTag()">Удалить
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        var idTag;
-
-        function setId(id) {
-            idTag = id;
-        }
-
-        function deleteTag() {
-            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-
-            $.ajax({
-                type: 'POST',
-                url: '/delete_tag',
-                data: {_token: CSRF_TOKEN, id: idTag},
-                success: function (data) {
-                    $("#rowTbl" + idTag).remove();
-                    //alert(data.success);
-                }
-            });
-        }
-    </script>
 @endsection
