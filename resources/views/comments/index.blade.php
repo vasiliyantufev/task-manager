@@ -5,7 +5,6 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">Comments</div>
 
                     <div class="card-body">
 
@@ -40,10 +39,10 @@
                                 <thead>
                                 <tr>
                                     <th scope="col">#</th>
-                                    <th scope="col">Text</th>
-                                    <th scope="col">Creator</th>
-                                    <th scope="col">Status</th>
-                                    <th scope="col">Created_at</th>
+                                    <th scope="col">@lang('messages.text')</th>
+                                    <th scope="col">@lang('messages.creator')</th>
+                                    <th scope="col">@lang('messages.status')</th>
+                                    <th scope="col">@lang('messages.created_at')</th>
                                     <th></th>
                                     <th></th>
                                 </tr>
@@ -60,14 +59,14 @@
                                         <td>{{ $comment->created_at }}</td>
                                         <td>
                                             <a href="{{ route('comments.edit', $comment->id) }}">
-                                                <input type="button" class="btn btn-info" value="Edit"/>
+                                                <input type="button" class="btn btn-info" value="@lang('messages.edit')"/>
                                             </a>
                                         </td>
                                         <td>
                                             <form action="{{ route("comments.destroy", $comment->id) }}" method="post">
                                                 @method('DELETE')
                                                 @csrf
-                                                <input class="btn btn-danger" type="submit" value="Delete" />
+                                                <input class="btn btn-danger" type="submit" value="@lang('messages.delete')" />
                                             </form>
                                         </td>
                                     </tr>
@@ -75,7 +74,7 @@
                                 </tbody>
                             </table>
                         @else
-                            <label>Комментарии не добавлены</label>
+                            <label>@lang('messages.no_comments_added')</label>
                         @endif
                     </div>
                 </div>

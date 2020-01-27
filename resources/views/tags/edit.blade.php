@@ -6,7 +6,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">Edit Task</div>
+                    <div class="card-header">@lang('messages.edit_tag')</div>
 
                     <div class="card-body">
 
@@ -44,14 +44,14 @@
 
 
                             <div class="form-group">
-                                <label for="title">Название</label>
+                                <label for="title">@lang('messages.title')</label>
                                 <input id="title" type="text" class="form-control" name="title" required value="{{ $tag->name }}">
                             </div>
 
                             <div class="form-group row mb-0">
                                 <div class="col-md-8">
-                                    <button type="submit" class="btn btn-primary">Сохранить</button>
-                                    <a class="btn btn-primary" href="{{ route('tags.index') }}">Отмена</a>
+                                    <button type="submit" class="btn btn-primary">@lang('messages.save')</button>
+                                    <a class="btn btn-primary" href="{{ route('tags.index') }}">@lang('messages.cancel')</a>
                                 </div>
                             </div>
 

@@ -5,7 +5,6 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">Tasks</div>
 
                     <div class="card-body">
 
@@ -36,14 +35,14 @@
                         @endif
 
                         <div class="form-group">
-                                <a class="btn btn-primary" href="{{ route('tasks.create') }}">Добавить task</a>
+                                <a class="btn btn-primary" href="{{ route('tasks.create') }}">@lang('messages.add_task')</a>
                         </div>
 
                             <form>
                                 <div class="form-row">
 
                                     <div class="col-md-4 mb-4">
-                                        <label>Создатель</label>
+                                        <label>@lang('messages.creator')</label>
                                         <select name="creator_id" class="form-control material-select" data-live-search="true">
                                             <option value=""></option>
                                             @foreach($users As $user)
@@ -56,7 +55,7 @@
                                         </select>
                                     </div>
                                     <div class="col-md-4 mb-4">
-                                        <label>Исполнитель</label>
+                                        <label>@lang('messages.executor')</label>
                                         <select name="executor_id" class="form-control material-select" data-live-search="true">
                                             <option value=""></option>
                                             @foreach($users As $user)
@@ -69,7 +68,7 @@
                                         </select>
                                     </div>
                                     <div class="col-md-4 mb-4">
-                                        <label>Статус</label>
+                                        <label>@lang('messages.status')</label>
                                         <select name="status_id" class="form-control material-select" data-live-search="true">
                                             <option value=""></option>
                                             @foreach($status As $key => $value)
@@ -85,7 +84,7 @@
                                 </div>
                                 <div class="form-row">
                                     <div class="col-md-12 mb-12">
-                                        <label>Теги</label>
+                                        <label>@lang('messages.tags')</label>
                                         <select  name="tag_id[]" class="form-control material-select" data-live-search="true" multiple>
                                             <option value=""></option>
                                             @foreach($tags As $tag)
@@ -100,8 +99,8 @@
                                 </div>
                                 <br>
                                 <div class="form-group">
-                                    <button class="btn btn-primary" type="submit">Применить фильтр</button>
-                                    <button class="btn btn-primary" type="reset">Сбросить фильтр</button>
+                                    <button class="btn btn-primary" type="submit">@lang('messages.apply_filter')</button>
+                                    <button class="btn btn-primary" type="reset">@lang('messages.reset_filter')</button>
                                 </div>
                             </form>
 
@@ -110,9 +109,9 @@
                             <thead>
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">Name</th>
-                                <th scope="col">Created_at</th>
-                                <th scope="col">Status</th>
+                                <th scope="col">@lang('messages.title')</th>
+                                <th scope="col">@lang('messages.created_at')</th>
+                                <th scope="col">@lang('messages.status')</th>
                                 <th></th>
                                 <th></th>
                             </tr>
@@ -128,7 +127,7 @@
                                     <td>
                                         @if ( Auth::id() == $task->creator_id || Auth::user()->isAdmin())
                                             <a href="{{ route('tasks.edit', $task->id) }}">
-                                                <input type="button" class="btn btn-info" value="Edit"/>
+                                                <input type="button" class="btn btn-info" value="@lang('messages.edit')"/>
                                             </a>
                                         @endif
                                     </td>
@@ -138,7 +137,7 @@
                                             <form action="{{ route("tasks.destroy", $task->id) }}" method="post">
                                                 @method('DELETE')
                                                 @csrf
-                                                <input class="btn btn-danger" type="submit" value="Delete" />
+                                                <input class="btn btn-danger" type="submit" value="@lang('messages.delete')" />
                                             </form>
                                         @endif
                                     </td>
@@ -148,7 +147,7 @@
                         </table>
 
                         @else
-                            <label>Задачи не добавлены</label>
+                            <label>@lang('messages.no_tasks_added')</label>
                         @endif
 
                     </div>

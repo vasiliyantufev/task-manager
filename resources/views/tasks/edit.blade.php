@@ -6,7 +6,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">Edit Task</div>
+                    <div class="card-header">@lang('messages.edit_task')</div>
 
                     <div class="card-body">
 
@@ -44,12 +44,12 @@
 
 
                             <div class="form-group">
-                                <label for="title">Название</label>
+                                <label for="title">@lang('messages.title')</label>
                                 <input id="title" type="text" class="form-control" name="title" required value="{{ $task->title }}">
                             </div>
 
                             <div class="form-group">
-                                <label for="title">Статус</label>
+                                <label for="title">@lang('messages.status')</label>
 
                                 <select name="status_id" class="form-control material-select" data-live-search="true">
                                     @foreach($status As $key => $value)
@@ -59,7 +59,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="title">Исполнитель</label>
+                                <label for="title">@lang('messages.executor')</label>
 
                                 <select name="executor_id" class="form-control material-select" data-live-search="true">
                                     @foreach($users As $user)
@@ -70,7 +70,7 @@
 
 
                             <div class="form-group">
-                                <label for="title">Теги</label>
+                                <label for="title">@lang('messages.tags')</label>
 
                                 <select name="tag_id[]" class="form-control material-select" data-live-search="true" multiple>
                                     @foreach($tags As $tag)
@@ -82,8 +82,8 @@
 
                             <div class="form-group row mb-0">
                                 <div class="col-md-8">
-                                    <button type="submit" class="btn btn-primary">Сохранить</button>
-                                    <a class="btn btn-primary" href="{{ route('tasks.index') }}">Отмена</a>
+                                    <button type="submit" class="btn btn-primary">@lang('messages.save')</button>
+                                    <a class="btn btn-primary" href="{{ route('tasks.index') }}">@lang('messages.cancel')</a>
                                 </div>
                             </div>
 

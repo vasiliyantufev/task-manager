@@ -5,7 +5,6 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">Tags</div>
 
                     <div class="card-body">
 
@@ -36,7 +35,7 @@
                         @endif
 
                         <div class="form-group">
-                            <a class="btn btn-primary" href="{{ route('tags.create') }}">Добавить tag</a>
+                            <a class="btn btn-primary" href="{{ route('tags.create') }}">@lang('messages.add_tag')</a>
                         </div>
 
                         @if(!$tags->isEmpty())
@@ -44,8 +43,8 @@
                                 <thead>
                                 <tr>
                                     <th scope="col">#</th>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Created_at</th>
+                                    <th scope="col">@lang('messages.title')</th>
+                                    <th scope="col">@lang('messages.created_at')</th>
                                     <th></th>
                                     <th></th>
                                 </tr>
@@ -59,14 +58,14 @@
                                         <td>{{ $tag->created_at }}</td>
                                         <td>
                                             <a href="{{ route('tags.edit', $tag->id) }}">
-                                                <input type="button" class="btn btn-info" value="Edit"/>
+                                                <input type="button" class="btn btn-info" value="@lang('messages.edit')"/>
                                             </a>
                                         </td>
                                         <td>
                                             <form action="{{ route("tags.destroy", $tag->id) }}" method="post">
                                                 @method('DELETE')
                                                 @csrf
-                                                <input class="btn btn-danger" type="submit" value="Delete" />
+                                                <input class="btn btn-danger" type="submit" value="@lang('messages.delete')" />
                                             </form>
                                         </td>
                                     </tr>
@@ -74,7 +73,7 @@
                                 </tbody>
                             </table>
                         @else
-                            <label>Теги не добавлены</label>
+                            <label>@lang('messages.no_tags_added')</label>
                         @endif
                     </div>
                 </div>

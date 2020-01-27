@@ -16,37 +16,37 @@
                                 <tr>
 
                                     <div class="form-group">
-                                        <label for="title">Логин:</label>
+                                        <label for="title">@lang('messages.nick_name'):</label>
                                         {{ $user->name }}
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="title">Электронная почта:</label>
+                                        <label for="title">@lang('messages.e-mail'):</label>
                                         {{ $user->email }}
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="title">Имя:</label>
+                                        <label for="title">@lang('messages.first_name'):</label>
                                         {{ $user->first_name }}
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="title">Отчество:</label>
+                                        <label for="title">@lang('messages.middle_name'):</label>
                                         {{ $user->middle_name }}
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="title">Фамилия:</label>
+                                        <label for="title">@lang('messages.last_name'):</label>
                                         {{ $user->last_name }}
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="title">Пол:</label>
-                                        @if ($user->sex == 1) Муж. @else Жен. @endif
+                                        <label for="title">@lang('messages.sex'):</label>
+                                        @if ($user->sex == 1) @lang('messages.man') @else @lang('messages.woman') @endif
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="title">Дата рождения:</label>
+                                        <label for="title">@lang('messages.birthday'):</label>
                                         {{ $user->birthday }}
                                     </div>
                                 </tr>

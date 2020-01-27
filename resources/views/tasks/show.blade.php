@@ -10,27 +10,27 @@
                     <div class="card-body">
 
                         <div class="form-group">
-                            <label for="title">Название:</label>
+                            <label for="title">@lang('messages.title'):</label>
                             {{ $task->title }}
                         </div>
 
                         <div class="form-group">
-                            <label for="title">Создатель:</label>
+                            <label for="title">@lang('messages.creator'):</label>
                             @if(isset($comment->creator->name)) {{ $comment->creator->name }} @else User deleted @endif
                         </div>
 
                         <div class="form-group">
-                            <label for="title">Исполнитель:</label>
+                            <label for="title">@lang('messages.executor'):</label>
                             @if(isset($executor->name)) {{ $executor->name }} @else User deleted @endif
                         </div>
 
                         <div class="form-group">
-                            <label for="title">Статус:</label>
+                            <label for="title">@lang('messages.status'):</label>
                             {{ $status }}
                         </div>
 
                         <div class="form-group">
-                            <label for="title">Теги:</label>
+                            <label for="title">@lang('messages.tags'):</label>
 
                             @foreach($tags As $tag)
                                 {{ $tag->name }}
@@ -45,14 +45,14 @@
                             @csrf
 
                             <div class="form-group">
-                                <label>Добавить комментарий:</label>
+                                <label>@lang('messages.addComment'):</label>
                                 <input type="hidden" name="task_id" value="{{ $task->id }}">
                                 <textarea class="form-control" rows="3" name="text"></textarea>
                             </div>
 
                             <div class="form-group row mb-0">
                                 <div class="col-md-8">
-                                    <button type="submit" class="btn btn-primary">Сохранить</button>
+                                    <button type="submit" class="btn btn-primary">@lang('messages.save')</button>
                                 </div>
                             </div>
                         </form>
