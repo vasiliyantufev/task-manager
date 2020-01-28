@@ -65,13 +65,6 @@
                         @guest
 
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('users.index') }}">@lang('messages.users')</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('tasks.index') }}">@lang('messages.tasks')</a>
-                            </li>
-
-                            <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">@lang('messages.login')</a>
                             </li>
                             @if (Route::has('register'))
@@ -82,10 +75,10 @@
                         @else
 
                             <li class="nav-item active">
-                                <a class="nav-link" href="/lang/en">En</a>
+                                <a class="nav-link" href="/localization/en">En</a>
                             </li>
                             <li class="nav-item active">
-                                <a class="nav-link" href="/lang/ru">Ru</a>
+                                <a class="nav-link" href="/localization/ru">Ru</a>
                             </li>
 
                             <li class="nav-item dropdown">
