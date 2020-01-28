@@ -87,7 +87,7 @@ class TaskController extends Controller
 
         return redirect()
             ->route('tasks.index')
-            ->with(['success' => "Запись успешно добавлена"]);
+            ->with(['success' => trans('flash.task_added')]);
     }
 
     /**
@@ -171,7 +171,7 @@ class TaskController extends Controller
             }
         }
 
-        return redirect()->route('tasks.edit', $id)->with(['success' => "Запись успешно обновлена"]);
+        return redirect()->route('tasks.edit', $id)->with(['success' => trans('flash.task_updated')]);
     }
 
     /**
@@ -185,6 +185,6 @@ class TaskController extends Controller
         $task = Task::find($id);
         $task->delete();
 
-        return redirect()->route('tasks.index')->with(['success' => "Задача успешно удалена"]);
+        return redirect()->route('tasks.index')->with(['success' =>  trans('flash.task_deleted')]);
     }
 }

@@ -18,6 +18,9 @@ return [
     'cancel' => 'Cancel',
     'edit_task' => 'Edit Task',
     'create_task' => 'Create Task',
+    'create_tag' => 'Create Tag',
+
+    'user_deleted' => 'User Deleted',
 
     'addComment' => 'Add a comment',
     'comments' => 'Comments',
@@ -32,6 +35,8 @@ return [
     'add_tag' => 'Add Tag',
     'edit_tag' => 'Edit Tag',
     'edit_comment' => 'Edit Comment',
+
+    'msg' => 'Example Laravel',
 
     'no_tasks_added' => 'No Tasks Added',
     'no_tags_added' => 'No tags added',

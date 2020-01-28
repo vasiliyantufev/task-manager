@@ -47,7 +47,7 @@ class TagController extends Controller
 
         return redirect()
             ->route('tags.index')
-            ->with(['success' => "Запись успешно добавлена"]);
+            ->with(['success' => trans('flash.tag_added')]);
     }
 
     /**
@@ -95,7 +95,7 @@ class TagController extends Controller
         $tag->name = $data['title'];
         $tag->save();
 
-        return redirect()->route('tags.edit', $id)->with(['success' => "Запись успешно обновлена"]);
+        return redirect()->route('tags.edit', $id)->with(['success' => trans('flash.tag_updated')]);
     }
 
     /**
@@ -109,6 +109,6 @@ class TagController extends Controller
         $tag = Tag::find($id);
         $tag->delete();
 
-        return redirect()->route('tags.index')->with(['success' => "Тэг успешно удален"]);
+        return redirect()->route('tags.index')->with(['success' => trans('flash.tag_deleted')]);
     }
 }

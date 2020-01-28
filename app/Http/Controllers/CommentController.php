@@ -49,7 +49,7 @@ class CommentController extends Controller
         $task->creator_id = Auth::id();
         $task->save();
 
-        return redirect()->back()->with(['success' => 'Comment checking!']);
+        return redirect()->back()->with(['success' => trans('flash.comment_added')]);
     }
 
     /**
@@ -98,7 +98,7 @@ class CommentController extends Controller
         $comment->status_id = $data['status_id'];
         $comment->save();
 
-        return redirect()->route('comments.edit', $id)->with(['success' => "Запись успешно обновлена"]);
+        return redirect()->route('comments.edit', $id)->with(['success' => trans('flash.comment_updated')]);
     }
 
     /**
@@ -112,6 +112,6 @@ class CommentController extends Controller
         $comment = Comment::find($id);
         $comment->delete();
 
-        return redirect()->route('comments.index')->with(['success' => "Комментарий успешно удален"]);
+        return redirect()->route('comments.index')->with(['success' => trans('flash.comment_deleted')]);
     }
 }

@@ -8,6 +8,32 @@
 
                     <div class="card-body">
 
+                        @if($errors->any())
+                            <div class="row justify-content-center">
+                                <div class="col-md-12">
+                                    <div class="alert alert-danger" role="alert">
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">x</span>
+                                        </button>
+                                        {{ $errors->first() }}
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
+
+                        @if(session('success'))
+                            <div class="row justify-content-center">
+                                <div class="col-md-12">
+                                    <div class="alert alert-success" role="alert">
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">x</span>
+                                        </button>
+                                        {{ session()->get('success') }}
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
+
                         <table class="table">
                             <thead>
                             <tr>
@@ -28,7 +54,11 @@
                                     <td>{{ $user->created_at }}</td>
                                     <td>
                                         @if (Auth::user()->isAdmin() && !$user->is_admin)
-                                            <input type="button" class="btn btn-danger" value="Delete" onclick="setId({{ $user->id }})" data-toggle="modal" data-target="#exampleModal">
+                                            <form action="{{ route("users.destroy", $user->id) }}" method="post">
+                                                @method('DELETE')
+                                                @csrf
+                                                <input class="btn btn-danger" type="submit" value="@lang('messages.delete')" />
+                                            </form>
                                         @endif
                                     </td>
                                 </tr>

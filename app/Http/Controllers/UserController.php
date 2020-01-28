@@ -77,22 +77,18 @@ class UserController extends Controller
     {
 
         $validatedData = $request->validate([
-            //'name' => ['required', 'string', 'max:255', 'unique:users'],
-            //'name' => ['required', 'string', 'max:255'],
             'first_name' => ['required', 'string', 'max:255'],
             'middle_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
             'sex' => ['required', 'int'],
             'birthday' => ['required'],
-            //'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            //'email' => ['required', 'string', 'email', 'max:255'],
         ]);
 
         $user = User::find($id);
         $user->fill($validatedData);
         $user->save();
 
-        return redirect()->back()->with(['success' => "Запись успешно обновлена"]);
+        return redirect()->back()->with(['success' => trans('flash.user_updated')]);
     }
 
 
@@ -108,6 +104,6 @@ class UserController extends Controller
         $user = User::find($id);
         $user->delete();
 
-        return redirect()->route('users.index')->with(['success' => "Запись успешно удалена"]);
+        return redirect()->route('users.index')->with(['success' => trans('flash.user_deleted')]);
     }
 }

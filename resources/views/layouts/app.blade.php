@@ -63,6 +63,14 @@
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                         @guest
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('users.index') }}">@lang('messages.users')</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('tasks.index') }}">@lang('messages.tasks')</a>
+                            </li>
+
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">@lang('messages.login')</a>
                             </li>
@@ -72,6 +80,14 @@
                                 </li>
                             @endif
                         @else
+
+                            <li class="nav-item active">
+                                <a class="nav-link" href="/lang/en">En</a>
+                            </li>
+                            <li class="nav-item active">
+                                <a class="nav-link" href="/lang/ru">Ru</a>
+                            </li>
+
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>

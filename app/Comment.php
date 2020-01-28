@@ -14,6 +14,6 @@ class Comment extends Model
 
     public function scopeActive($query)
     {
-        return $query->where('status', 1);
+        return $query->where('status_id', 1);
     }
 }
