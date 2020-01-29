@@ -70,11 +70,7 @@ class TagController extends Controller
     public function edit($id)
     {
         //
-        $tag = Tag::find($id);
-
-        if (is_null($tag)) {
-            abort(404);
-        }
+        $tag = Tag::findOrFail($id);
 
         return view('tags.edit', compact('tag'));
     }
@@ -91,7 +87,7 @@ class TagController extends Controller
         //
         $data = $request->all();
 
-        $tag = Tag::find($id);
+        $tag = Tag::findOrFail($id);
         $tag->name = $data['title'];
         $tag->save();
 
@@ -106,7 +102,7 @@ class TagController extends Controller
      */
     public function destroy($id)
     {
-        $tag = Tag::find($id);
+        $tag = Tag::findOrFail($id);
         $tag->delete();
 
         return redirect()->route('tags.index')->with(['success' => trans('flash.tag_deleted')]);

@@ -47,10 +47,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $user = User::find($id);
-        if (is_null($user)) {
-            abort(404);
-        }
+        $user = User::findOrFail($id);
 
         return view('users.show', compact('user'));
     }
@@ -84,7 +81,7 @@ class UserController extends Controller
             'birthday' => ['required'],
         ]);
 
-        $user = User::find($id);
+        $user = User::findOrFail($id);
         $user->fill($validatedData);
         $user->save();
 
@@ -101,7 +98,7 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
-        $user = User::find($id);
+        $user = User::findOrFail($id);
         $user->delete();
 
         return redirect()->route('users.index')->with(['success' => trans('flash.user_deleted')]);

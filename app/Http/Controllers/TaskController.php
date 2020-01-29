@@ -99,11 +99,7 @@ class TaskController extends Controller
     public function show($id)
     {
         //
-        $task = Task::find($id);
-
-        if (is_null($task)) {
-            abort(404);
-        }
+        $task = Task::findOrFail($id);
 
         $status = config('status');
         $status = $status[$task->status_id];
@@ -127,11 +123,7 @@ class TaskController extends Controller
     public function edit($id)
     {
         //
-        $task = Task::find($id);
-
-        if (is_null($task)) {
-            abort(404);
-        }
+        $task = Task::findOrFail($id);
 
         $users = User::all();
         $tags = Tag::all();
@@ -182,7 +174,7 @@ class TaskController extends Controller
      */
     public function destroy($id)
     {
-        $task = Task::find($id);
+        $task = Task::findOrFail($id);
         $task->delete();
 
         return redirect()->route('tasks.index')->with(['success' =>  trans('flash.task_deleted')]);

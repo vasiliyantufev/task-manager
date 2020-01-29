@@ -71,12 +71,7 @@ class CommentController extends Controller
      */
     public function edit($id)
     {
-        $comment = Comment::find($id);
-
-        if (is_null($comment)) {
-            abort(404);
-        }
-
+        $comment = Comment::findOrFail($id);
         $status = config('status');
 
         return view('comments.edit', compact('comment', 'status'));
@@ -94,7 +89,7 @@ class CommentController extends Controller
         //
         $data = $request->all();
 
-        $comment = Comment::find($id);
+        $comment = Comment::findOrFail($id);
         $comment->status_id = $data['status_id'];
         $comment->save();
 
@@ -109,7 +104,7 @@ class CommentController extends Controller
      */
     public function destroy($id)
     {
-        $comment = Comment::find($id);
+        $comment = Comment::findOrFail($id);
         $comment->delete();
 
         return redirect()->route('comments.index')->with(['success' => trans('flash.comment_deleted')]);

@@ -13,7 +13,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('/users', 'UserController');
     Route::resource('/tasks', 'TaskController');
     Route::resource('/comments', 'CommentController');
-
 });
 
 Route::group(['middleware' => ['auth', CheckAdmin::class]], function () {
