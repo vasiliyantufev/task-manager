@@ -71,7 +71,6 @@ class TagController extends Controller
     {
         //
         $tag = Tag::findOrFail($id);
-
         return view('tags.edit', compact('tag'));
     }
 

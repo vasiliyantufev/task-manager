@@ -151,7 +151,6 @@ class TaskController extends Controller
         $task->save();
 
         TagTask::where('task_id', '=', $id)->delete();
-
         if (isset($data['tag_id'])) {
             foreach ($data['tag_id'] as $tag) {
                 TagTask::insert(['task_id' => $id, 'tag_id' => $tag]);

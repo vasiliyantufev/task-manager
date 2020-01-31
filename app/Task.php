@@ -50,4 +50,8 @@ class Task extends Model
         return $this->hasMany('App\Comment')->where('status_id', 1);
     }
 
+    public function tags()
+    {
+        return $this->hasMany('App\TagTask', 'task_id', 'id');
+    }
 }
