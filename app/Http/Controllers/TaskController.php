@@ -100,18 +100,13 @@ class TaskController extends Controller
     {
         //
         $task = Task::findOrFail($id);
-
         $status = config('status');
         $status = $status[$task->status_id];
-
-        $comments = Comment::where('task_id', $task->id)->active()->get();
 
         $tagsId = TagTask::where('task_id', $task->id)->get('tag_id')->toArray();
         $tags = Tag::whereIn('id', $tagsId)->get('name');
 
-        $creator  = User::where('id', $task->creator_id)->first();
-        $executor = User::where('id', $task->executor_id)->first();
-        return view('tasks.show', compact('task', 'status', 'tags', 'creator', 'executor', 'comments'));
+        return view('tasks.show', compact('task', 'status', 'tags'));
     }
 
     /**
@@ -149,7 +144,7 @@ class TaskController extends Controller
         //
         $data = $request->all();
 
-        $task = Task::find($id);
+        $task = Task::findOrFail($id);
         $task->title = $data['title'];
         $task->status_id = $data['status_id'];
         $task->executor_id = $data['executor_id'];

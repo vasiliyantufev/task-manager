@@ -42,12 +42,12 @@
 
                         <div class="form-group">
                             <label for="title">@lang('messages.creator'):</label>
-                            @if(isset($comment->creator->name)) {{ $comment->creator->name }} @else @lang('messages.user_deleted') @endif
+                            @if(isset($task->creator->name)) {{ $task->creator->name }} @else @lang('messages.user_deleted') @endif
                         </div>
 
                         <div class="form-group">
                             <label for="title">@lang('messages.executor'):</label>
-                            @if(isset($executor->name)) {{ $executor->name }} @else User deleted @endif
+                            @if(isset($task->executor->name)) {{ $task->executor->name }} @else @lang('messages.user_deleted') @endif
                         </div>
 
                         <div class="form-group">
@@ -84,7 +84,7 @@
                         </form>
                         </div>
 
-                        @if ( !$comments->isEmpty() )
+                        @if ( !$task->comments->isEmpty() )
                             <div class="form-group">
                                 <label for="title">Комментарии:</label>
 
@@ -98,7 +98,7 @@
                                     </thead>
 
                                     <tbody>
-                                    @foreach($comments As $comment)
+                                    @foreach($task->comments As $comment)
                                         <tr>
                                             <td>{{ $comment->text }}</td>
                                             <td>@if(isset($comment->creator->name)) {{ $comment->creator->name }} @else User deleted @endif</td>

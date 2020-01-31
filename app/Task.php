@@ -34,4 +34,20 @@ class Task extends Model
             return $query->whereIn('tag_id', $name);
         }
     }
+
+    public function creator()
+    {
+        return $this->belongsTo('App\User', 'creator_id', 'id');
+    }
+
+    public function executor()
+    {
+        return $this->belongsTo('App\User', 'executor_id', 'id');
+    }
+
+    public function comments()
+    {
+        return $this->hasMany('App\Comment')->where('status_id', 1);
+    }
+
 }
