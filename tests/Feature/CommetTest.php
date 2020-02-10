@@ -8,8 +8,6 @@ use App\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Support\Str;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class CommentTest extends TestCase
 {
@@ -32,34 +30,16 @@ class CommentTest extends TestCase
         $response->assertStatus(200);
     }
 
-    public function testShow()
+    public function testSeeComment()
     {
         $response = $this->get(route('comments.index'));
         $response->assertStatus(200);
         $response->assertSee($this->comment->name);
     }
 
-    public function testUpdate()
+    public function testNotFound()
     {
-        $text = $this->comment->text;
-        $this->comment->text = $text;
-        $this->comment->save();
-        $commentRandomName = Str::random(64);
-        $this->comment->text = $commentRandomName;
-        $this->comment->save();
-
         $response = $this->get(route('comments.index'));
-        $response->assertStatus(200);
-        $response->assertDontSee($text);
-        $response->assertSee($commentRandomName);
-    }
-
-    public function testDestroy()
-    {
-        $name = $this->comment->text;
-        $this->comment->delete();
-        $response = $this->get(route('comments.index'));
-        $response->assertStatus(200);
-        $response->assertDontSee($name);
+        $response->assertDontSee(Str::random(64));
     }
 }

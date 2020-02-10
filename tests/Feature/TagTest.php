@@ -30,34 +30,16 @@ class TagTest extends TestCase
         $response->assertStatus(200);
     }
 
-    public function testShow()
+    public function testSeeTag()
     {
         $response = $this->get(route('tags.index'));
         $response->assertStatus(200);
         $response->assertSee($this->tag->name);
     }
 
-    public function testUpdate()
+    public function testNotFound()
     {
-        $name = $this->tag->name;
-        $this->tag->name = $name;
-        $this->tag->save();
-        $tagRandomName = Str::random(32);
-        $this->tag->name = $tagRandomName;
-        $this->tag->save();
-
         $response = $this->get(route('tags.index'));
-        $response->assertStatus(200);
-        $response->assertDontSee($name);
-        $response->assertSee($tagRandomName);
-    }
-
-    public function testDestroy()
-    {
-        $name = $this->tag->name;
-        $this->tag->delete();
-        $response = $this->get(route('tags.index'));
-        $response->assertStatus(200);
-        $response->assertDontSee($name);
+        $response->assertDontSee(Str::random(64));
     }
 }

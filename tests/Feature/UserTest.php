@@ -30,32 +30,14 @@ class UserTest extends TestCase
 
     public function testShow()
     {
-        $response = $this->get(route('users.show', $this->user->id));
+        $response = $this->get(route('users.show', $this->user));
         $response->assertStatus(200);
         $response->assertSee($this->user->name);
     }
 
-    public function testUpdate()
+    public function testNotFound()
     {
-        $id = $this->user->id;
-        $name = $this->user->name;
-        $this->user->name = $name;
-        $this->user->save();
-        $userRandomName = Str::random(32);
-        $this->user->name = $userRandomName;
-        $this->user->save();
-
-        $response = $this->get(route('users.show', $id));
-        $response->assertStatus(200);
-        $response->assertDontSee($name);
-        $response->assertSee($userRandomName);
-    }
-
-    public function testDestroy()
-    {
-        $id = $this->user->id;
-        $this->user->delete();
-        $response = $this->get(route('users.show', $id));
+        $response = $this->get(route('users.show', rand()));
         $response->assertStatus(404);
     }
 }
