@@ -75,10 +75,10 @@
                         @else
 
                             <li class="nav-item active">
-                                <a class="nav-link" href="/localization/en">En</a>
+                                <a class="nav-link" href="{{ route('localization', 'en') }}">En</a>
                             </li>
                             <li class="nav-item active">
-                                <a class="nav-link" href="/localization/ru">Ru</a>
+                                <a class="nav-link" href="{{ route('localization', 'ru') }}">Ru</a>
                             </li>
 
                             <li class="nav-item dropdown">

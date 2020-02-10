@@ -19,4 +19,4 @@ Route::group(['middleware' => ['auth', CheckAdmin::class]], function () {
     Route::resource('/tags', 'TagController');
 });
 
-Route::get('localization/{locale}', 'LocalizationController@index');
+Route::get('localization/{locale}', 'LocalizationController@index')->name('localization');
