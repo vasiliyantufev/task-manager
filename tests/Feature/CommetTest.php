@@ -6,7 +6,6 @@ use App\Comment;
 use App\Task;
 use App\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Support\Str;
 use Tests\TestCase;
 
 class CommentTest extends TestCase
