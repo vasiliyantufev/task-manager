@@ -23,7 +23,6 @@ class TagTest extends TestCase
         $this->actingAs($this->user);
     }
 
-
     public function testIndex()
     {
         $response = $this->get(route('tags.index'));
@@ -37,9 +36,11 @@ class TagTest extends TestCase
         $response->assertSee($this->tag->name);
     }
 
-    public function testNotFound()
+    public function testDestroy()
     {
+        $name = $this->tag->name;
+        $this->tag->delete();
         $response = $this->get(route('tags.index'));
-        $response->assertDontSee(Str::random(64));
+        $response->assertDontSee($name);
     }
 }

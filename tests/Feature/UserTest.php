@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -21,7 +22,6 @@ class UserTest extends TestCase
         $this->actingAs($this->user);
     }
 
-
     public function testIndex()
     {
         $response = $this->get(route('users.index'));
@@ -37,7 +37,15 @@ class UserTest extends TestCase
 
     public function testNotFound()
     {
-        $response = $this->get(route('users.show', rand()));
+        $response = $this->get(route('users.show', User::max('id') + 1));
+        $response->assertStatus(404);
+    }
+
+    public function testDestroy()
+    {
+        $id = $this->user->id;
+        $this->user->delete();
+        $response = $this->get(route('users.show', $id));
         $response->assertStatus(404);
     }
 }

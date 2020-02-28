@@ -23,7 +23,6 @@ class CommentTest extends TestCase
         $this->actingAs($this->user);
     }
 
-
     public function testIndex()
     {
         $response = $this->get(route('comments.index'));
@@ -37,9 +36,11 @@ class CommentTest extends TestCase
         $response->assertSee($this->comment->name);
     }
 
-    public function testNotFound()
+    public function testDestroy()
     {
+        $text = $this->comment->text;
+        $this->comment->delete();
         $response = $this->get(route('comments.index'));
-        $response->assertDontSee(Str::random(64));
+        $response->assertDontSee($text);
     }
 }

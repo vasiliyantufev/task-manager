@@ -23,7 +23,6 @@ class TaskTest extends TestCase
         $this->actingAs($this->user);
     }
 
-
     public function testIndex()
     {
         $response = $this->get(route('tasks.index'));
@@ -39,7 +38,15 @@ class TaskTest extends TestCase
 
     public function testNotFound()
     {
-        $response = $this->get(route('tasks.show', rand()));
+        $response = $this->get(route('tasks.show', Task::max('id') + 1));
+        $response->assertStatus(404);
+    }
+
+    public function testDestroy()
+    {
+        $id = $this->task->id;
+        $this->task->delete();
+        $response = $this->get(route('tasks.show', $id));
         $response->assertStatus(404);
     }
 }
