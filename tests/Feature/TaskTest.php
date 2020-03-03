@@ -43,9 +43,8 @@ class TaskTest extends TestCase
 
     public function testDestroy()
     {
-        $id = $this->task->id;
-        $this->task->delete();
-        $response = $this->get(route('tasks.show', $id));
-        $response->assertStatus(404);
+        $title = $this->task->title;
+        $response = $this->delete(route('tasks.destroy', $this->task->id));
+        $response->assertDontSee($title);
     }
 }

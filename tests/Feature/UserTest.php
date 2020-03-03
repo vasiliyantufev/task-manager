@@ -42,7 +42,7 @@ class UserTest extends TestCase
     public function testDestroy()
     {
         $name = $this->user->name;
-        $response = $this->get(route('users.destroy', $this->user->id));
+        $response = $this->delete(route('users.destroy', $this->user->id));
         $response->assertDontSee($name);
     }
 }

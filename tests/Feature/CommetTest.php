@@ -38,7 +38,7 @@ class CommentTest extends TestCase
     public function testDestroy()
     {
         $text = $this->comment->text;
-        $response = $this->get(route('comments.destroy', $this->comment->id));
+        $response = $this->delete(route('comments.destroy', $this->comment->id));
         $response->assertDontSee($text);
     }
 }

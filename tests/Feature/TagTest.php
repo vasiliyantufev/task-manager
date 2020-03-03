@@ -38,7 +38,7 @@ class TagTest extends TestCase
     public function testDestroy()
     {
         $name = $this->tag->name;
-        $response = $this->get(route('tags.destroy', $this->tag->id));
+        $response = $this->delete(route('tags.destroy', $this->tag->id));
         $response->assertDontSee($name);
     }
 }
